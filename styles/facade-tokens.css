@@ -1,0 +1,216 @@
+/**
+ * Facade UI — design tokens.
+ *
+ * Two token families live here:
+ *
+ * 1. shadcn-compatible names (`--background`, `--primary`, `--radius`, …). Facade
+ *    sections only ever reference these, so dropping a section into an existing
+ *    shadcn project makes it inherit that project's theme with zero edits.
+ * 2. Marketing-specific tokens under a `--facade-` prefix (display type, section
+ *    rhythm, motion) that shadcn does not define and that would otherwise collide.
+ *
+ * The default palette is Tailwind's orange on stone. Two values are not a plain
+ * step, both for contrast: `--primary-foreground` is ink (white on orange 600
+ * is 3.6:1), and `--input` is darkened until it clears 3:1. `--primary` is for
+ * fills, icons and rings, never running text. More presets are in `themes.css`.
+ */
+
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* ---------------------------------------------------------------- shadcn */
+  --radius: 0.625rem;
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.147 0.004 49.25); /* stone 950 */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.147 0.004 49.25);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.147 0.004 49.25);
+  --primary: oklch(0.646 0.222 41.116); /* orange 600 */
+  --primary-foreground: oklch(0.147 0.004 49.25); /* ink, not white */
+  --secondary: oklch(0.97 0.001 106.424); /* stone 100 */
+  --secondary-foreground: oklch(0.216 0.006 56.043); /* stone 900 */
+  --muted: oklch(0.97 0.001 106.424);
+  --muted-foreground: oklch(0.444 0.011 73.639); /* stone 600 */
+  --accent: oklch(0.954 0.038 75.164); /* orange 100 */
+  --accent-foreground: oklch(0.47 0.157 37.304); /* orange 800 */
+  --destructive: oklch(0.577 0.245 27.325); /* red 600 */
+  --destructive-foreground: oklch(0.985 0.001 106.423); /* stone 50 */
+  --border: oklch(0.923 0.003 48.717); /* stone 200 */
+  /*
+   * `--input` is the border of a form control, not a divider, so it has to
+   * clear 3:1 against the background on its own (WCAG 1.4.11). That is a good
+   * deal darker than `--border`, and deliberately so — a hairline is decorative,
+   * the edge of a text field is the only thing identifying it as one.
+   */
+  --input: oklch(0.664 0.01 56.259);
+  --ring: oklch(0.646 0.222 41.116);
+
+  /* ---------------------------------------------------------------- facade */
+  --facade-font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+  --facade-font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* Fluid display scale. Marketing headlines should not need breakpoint juggling. */
+  --facade-text-display-sm: clamp(1.75rem, 1.45rem + 1.4vw, 2.25rem);
+  --facade-text-display-md: clamp(2.25rem, 1.75rem + 2.4vw, 3rem);
+  --facade-text-display-lg: clamp(2.75rem, 1.95rem + 3.8vw, 4rem);
+  --facade-text-display-xl: clamp(3.25rem, 2.1rem + 5.4vw, 5.5rem);
+
+  --facade-leading-display: 1.08;
+  --facade-tracking-display: -0.022em;
+
+  /* Vertical rhythm. `--facade-section-y` is the default band padding. */
+  --facade-section-y-sm: clamp(2.5rem, 1.75rem + 3vw, 4rem);
+  --facade-section-y: clamp(3.5rem, 2.25rem + 5vw, 7rem);
+  --facade-section-y-lg: clamp(5rem, 3rem + 8vw, 10rem);
+
+  --facade-container-max: 80rem;
+  --facade-container-gutter: 1.25rem;
+
+  /* Motion. Durations are read by FacadeMotionProvider and fed to MotionConfig. */
+  --facade-duration-fast: 150ms;
+  --facade-duration-base: 320ms;
+  --facade-duration-slow: 620ms;
+  --facade-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --facade-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --facade-ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --facade-motion-distance: 1rem;
+}
+
+.dark {
+  --background: oklch(0.147 0.004 49.25); /* stone 950 */
+  --foreground: oklch(0.985 0.001 106.423); /* stone 50 */
+  --card: oklch(0.216 0.006 56.043); /* stone 900 */
+  --card-foreground: oklch(0.985 0.001 106.423);
+  --popover: oklch(0.268 0.007 34.298); /* stone 800 */
+  --popover-foreground: oklch(0.985 0.001 106.423);
+  --primary: oklch(0.705 0.213 47.604); /* orange 500 */
+  --primary-foreground: oklch(0.147 0.004 49.25);
+  --secondary: oklch(0.268 0.007 34.298);
+  --secondary-foreground: oklch(0.985 0.001 106.423);
+  --muted: oklch(0.268 0.007 34.298);
+  --muted-foreground: oklch(0.709 0.01 56.259); /* stone 400 */
+  --accent: oklch(0.266 0.079 36.259); /* orange 950 */
+  --accent-foreground: oklch(0.837 0.128 66.29); /* orange 300 */
+  --destructive: oklch(0.704 0.191 22.216); /* red 400 */
+  --destructive-foreground: oklch(0.147 0.004 49.25);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(0.553 0.013 58.071); /* stone 500 */
+  --ring: oklch(0.705 0.213 47.604);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 10px);
+
+  --font-sans: var(--facade-font-sans);
+  --font-mono: var(--facade-font-mono);
+
+  /* `text-display-lg` and friends. */
+  --text-display-sm: var(--facade-text-display-sm);
+  --text-display-sm--line-height: var(--facade-leading-display);
+  --text-display-sm--letter-spacing: var(--facade-tracking-display);
+  --text-display-md: var(--facade-text-display-md);
+  --text-display-md--line-height: var(--facade-leading-display);
+  --text-display-md--letter-spacing: var(--facade-tracking-display);
+  --text-display-lg: var(--facade-text-display-lg);
+  --text-display-lg--line-height: var(--facade-leading-display);
+  --text-display-lg--letter-spacing: var(--facade-tracking-display);
+  --text-display-xl: var(--facade-text-display-xl);
+  --text-display-xl--line-height: var(--facade-leading-display);
+  --text-display-xl--letter-spacing: var(--facade-tracking-display);
+
+  /* `py-section`, `max-w-facade`. */
+  --spacing-section-sm: var(--facade-section-y-sm);
+  --spacing-section: var(--facade-section-y);
+  --spacing-section-lg: var(--facade-section-y-lg);
+  --spacing-gutter: var(--facade-container-gutter);
+  --container-facade: var(--facade-container-max);
+
+  /* `ease-facade-out`, `duration-facade-base`. */
+  --ease-facade-out: var(--facade-ease-out);
+  --ease-facade-in-out: var(--facade-ease-in-out);
+  --ease-facade-spring: var(--facade-ease-spring);
+}
+
+/**
+ * `duration-facade-*` — Tailwind v4 has no `--duration-*` theme namespace, so the
+ * three motion durations are exposed as explicit utilities instead.
+ */
+@utility duration-facade-fast {
+  transition-duration: var(--facade-duration-fast);
+}
+@utility duration-facade-base {
+  transition-duration: var(--facade-duration-base);
+}
+@utility duration-facade-slow {
+  transition-duration: var(--facade-duration-slow);
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Every interactive element in the registry relies on this ring. */
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+
+  /*
+   * Belt and braces alongside MotionConfig reducedMotion="user": kills CSS
+   * transitions and scroll behaviour for users who ask for less motion.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

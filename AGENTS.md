@@ -1,9 +1,11 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# Notes for coding agents
 
-# This is NOT the Next.js you know
+This is a marketing site built with [Facade UI](https://facadeui.dev): sections and page templates installed with the shadcn CLI. The source of every section is in `components/`, and it is yours to edit.
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
-
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->
+- `app/page.tsx` renders the `SaasLanding` template with the content in `content/sample.tsx`. Replace the content first; change the sections second.
+- Add a section: `npx shadcn@latest add @facade/<name>` (search with `npx shadcn@latest search @facade -q <word>`; read `https://facadeui.dev/components/<name>.md` before using it).
+- Keep one `h1` per page. Heroes default to `headingLevel={1}`, other sections to `2`.
+- Sections import nothing from `next/*`: pass `link={Link}` and `image={Image}`.
+- Icons come from `lucide-react`. A page that passes icons to a template or a `-motion` section must be a client component.
+- `styles/facade-tokens.css` is imported in `app/globals.css` and must stay. Change colours by overriding the shadcn variables below that import, or generate a theme at https://facadeui.dev/docs/customise.
+- The full guide for agents: https://facadeui.dev/docs/agents.

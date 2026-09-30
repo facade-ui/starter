@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Facade UI starter
 
-## Getting Started
+A Next.js marketing site with one complete landing page, built from [Facade UI](https://facadeui.dev) sections. The sections are copied into `components/`, so there is no package to depend on: read them, change them, keep them.
 
-First, run the development server:
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ffacade-ui%2Fstarter&project-name=my-site&repository-name=my-site)
+
+## Start
 
 ```bash
+npx create-next-app@latest my-site -e https://github.com/facade-ui/starter
+cd my-site
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Replace the copy in `content/sample.tsx`.
+2. Edit `app/page.tsx` to add, remove or reorder sections.
+3. Add more sections: `npx shadcn@latest add @facade/<name>`. See https://facadeui.dev/components.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## What is inside
 
-## Learn More
+- `app/page.tsx`: the `SaasLanding` template with sample content.
+- `components/sections`, `components/templates`, `components/ui`: the Facade UI source, installed with the shadcn CLI.
+- `styles/facade-tokens.css`: the design tokens, imported in `app/globals.css`. Override the shadcn colour variables below that import to change the theme, or generate one at https://facadeui.dev/docs/customise.
+- `AGENTS.md`: notes for AI coding agents working in this repository.
 
-To learn more about Next.js, take a look at the following resources:
+Built with React 19, Next.js 16, Tailwind CSS v4 and Base UI. Every Facade section is tested against WCAG 2.2 AA.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Licence
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT.

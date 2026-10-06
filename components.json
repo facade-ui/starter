@@ -20,8 +20,5 @@
     "hooks": "@/hooks"
   },
   "menuColor": "default",
-  "menuAccent": "subtle",
-  "registries": {
-    "@facade": "https://facadeui.dev/r/{name}.json"
-  }
+  "menuAccent": "subtle"
 }

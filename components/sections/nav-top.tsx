@@ -33,13 +33,13 @@
  * This component is `"use client"` because the drawer holds open state. It is
  * the only section in the registry that does.
  *
- * Dependencies: @base-ui-components/react, lucide-react, react,
+ * Dependencies: @base-ui/react, lucide-react, react,
  * @/lib/types, @/lib/utils, @/components/ui/button,
  * @/components/ui/container.
  */
 
-import { Dialog } from "@base-ui-components/react/dialog"
-import { NavigationMenu } from "@base-ui-components/react/navigation-menu"
+import { Dialog } from "@base-ui/react/dialog"
+import { NavigationMenu } from "@base-ui/react/navigation-menu"
 import { ChevronDownIcon, MenuIcon, XIcon } from "lucide-react"
 import { useState, type ElementType, type ReactNode } from "react"
 
@@ -133,17 +133,7 @@ export function NavTop({
           aria-label="Main"
           className="hidden min-w-0 lg:flex lg:items-center"
         >
-          {/*
-            Base UI 1.0.0-rc.0 puts `aria-orientation="horizontal"` on the list.
-            ARIA does not allow that attribute on `role="list"`, and axe flags it
-            as a critical violation. Passing it explicitly as undefined drops the
-            attribute; the arrow-key behaviour it described is handled by Base
-            UI's composite regardless. Revisit when upstream fixes it.
-          */}
-          <NavigationMenu.List
-            aria-orientation={undefined}
-            className="flex items-center gap-1"
-          >
+          <NavigationMenu.List className="flex items-center gap-1">
             {items.map((item) =>
               item.children?.length ? (
                 <NavigationMenu.Item key={item.label}>
@@ -251,13 +241,6 @@ export function NavTop({
 
           {/* Mobile drawer. */}
           <Dialog.Root open={menuOpen} onOpenChange={setMenuOpen}>
-            {/*
-              Styled with `buttonVariants` rather than `render={<Button />}`.
-              Base UI inspects the element handed to `render` to decide whether
-              it is a native button, and cannot see through a wrapper component
-              — so the Button form logs a warning on every mount even though the
-              DOM ends up correct. Base UI already renders a real <button> here.
-            */}
             <Dialog.Trigger
               aria-label={menuLabel}
               className={cn(

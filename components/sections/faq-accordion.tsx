@@ -1,4 +1,4 @@
-import { Accordion } from "@base-ui-components/react/accordion"
+import { Accordion } from "@base-ui/react/accordion"
 import { ChevronDownIcon } from "lucide-react"
 import type { ElementType, ReactNode } from "react"
 

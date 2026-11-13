@@ -1,7 +1,7 @@
 import {
   Button as BaseButton,
   type ButtonProps as BaseButtonProps,
-} from "@base-ui-components/react/button"
+} from "@base-ui/react/button"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Loader2Icon } from "lucide-react"
 
